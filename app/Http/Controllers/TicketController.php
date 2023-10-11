@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\User;
 
 class TicketController extends Controller
 {
@@ -34,10 +35,10 @@ class TicketController extends Controller
         ]);
     }
 
-    public function show(Ticket $ticket)
+    public function show($id)
     {
-        return view('show-ticket', [
-            'ticket' => $ticket,
-        ]);
+        $ticket = Ticket::where('id', $id)->first();
+
+        return view('show-ticket', compact('ticket'));
     }
 }
