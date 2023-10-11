@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('closed.ticket.index')" :active="request()->routeIs('closed-tickets')">
                         {{ __('Closed Tickets') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('ticket.create')" :active="request()->routeIs('ticket')">
+                        {{ __('Create Ticket') }}
+                    </x-nav-link>
                 </div>
             </div>
 
