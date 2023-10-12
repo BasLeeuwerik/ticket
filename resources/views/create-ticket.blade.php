@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
+    <div class="container text-white-900 mt-6 ml-6 mb-6 mr-6" style="width:100%">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white text-white-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
-                    <div class="container mt-6 mb-6 mr-6 ml-6">
-                        <form method="POST" action="{{ route('ticket.store') }}" enctype="multipart/form-data">
+                    <div class="container mt-6 mb-6 mr-6 ml-6 text-gray-900">
+                        <form method="POST" action="{{ route('tickets.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">

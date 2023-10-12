@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Request;
 
 class TicketController extends Controller
@@ -43,7 +44,7 @@ class TicketController extends Controller
 
     public function create()
     {
-        return view('create-ticket');
+        return view('create-ticket', 'users');
     }
 
     public function store(Request $request)
@@ -70,31 +71,33 @@ class TicketController extends Controller
     
         $ticket->save();
     
-        return redirect()->route('ticket.show', $ticket->id)->with('success', 'Ticket created successfully');
+        return redirect()->route('tickets.show', $ticket->id)->with('success', 'Ticket created successfully');
     }
 
-    public function edit(Ticket $ticket, $id)
+    public function edit(User $user, Ticket $ticket)
     {
-        $ticket = Ticket::where('id', $id)->first();
+        $users = User::all();
 
-        return view('edit-ticket', compact('id', 'ticket'));
+        // dd($users);
+
+        $tickets = Ticket::all();
+
+        $ticket = Ticket::where('id', $ticket->id)->first();
+
+        $user = User::where('id', $ticket->user_id)->first();
+
+        $selectedUser = $user;
+
+        return view('edit-ticket', compact('ticket', 'users', 'user', 'selectedUser'));
     }
 
-    public function update(Request $request,Ticket $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'start_date_time' => 'required|date',
-            'end_date_time' => 'required|date|after:start_date_time',
-            'name' => 'required|string',
-            'note' => 'required|string',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
         $ticket = Ticket::findOrFail($id);
 
         $ticket->start_date_time = $request->input('start_date_time');
         $ticket->end_date_time = $request->input('end_date_time');
-        $ticket->employee = $request->input('employee');
+        $ticket->name = $request->input('name');
         $ticket->note = $request->input('note');
 
         if ($request->hasFile('photo')) {

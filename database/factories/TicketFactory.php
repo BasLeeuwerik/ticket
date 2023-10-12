@@ -24,7 +24,6 @@ class TicketFactory extends Factory
         return [
             'start_date_time' => fake()->dateTimeBetween('-1 week', 'now'),
             'end_date_time' => fake()->dateTimeBetween('now', '+1 week'),
-            'employee' => fake()->name,
             'comment' => fake()->sentence,
             'status' => fake()->randomElement(TicketStatusType::cases())->value,
             'image_url' => fake()->imageUrl(),

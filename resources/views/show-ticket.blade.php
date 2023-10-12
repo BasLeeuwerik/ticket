@@ -17,14 +17,14 @@
 
                 @endphp
                 <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
-                <a href="/ticket/{{ $ticket->id }}/edit">Edit</a>
+                <a href="/tickets/{{ $ticket->id }}/edit">Edit</a>
 
                     <p class="mt-6">Status: {{ $ticket->status }} </p>
                     <p class="mb-6 mt-6">Duration: {{ $days }}</p>
 
                     <p>Start Date & Time: {{ $ticket->start_date_time }}</p>
                     <p>End Date & Time: {{ $ticket->end_date_time }}</p>
-                    <p>Employee: {{ $ticket->employee }}</p>
+                    <p>Employee: {{ $ticket->user->name }}</p>
                     <p>Note: {{ $ticket->comment }}</p>
                     <p>Photo: <img src="{{ asset('path_to_your_images/' . $ticket->image_url) }}" alt="Ticket Photo"></p>
 

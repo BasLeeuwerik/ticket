@@ -23,13 +23,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/open-tickets', [TicketController::class, 'openIndex'])->name('open.ticket.index');
-Route::get('/closed-tickets', [TicketController::class, 'closedIndex'])->name('closed.ticket.index');
-Route::get('/ticket/{id}/show', [TicketController::class, 'show'])->name('ticket.show');
-Route::get('/ticket/{id}/edit', [TicketController::class, 'edit'])->name('ticket.edit');
-Route::patch('/ticket/{id}', [TicketController::class, 'update'])->name('ticket.update');
-Route::get('/ticket/create', [TicketController::class, 'create'])->name('ticket.create');
-Route::post('/ticket', [TicketController::class, 'store'])->name('ticket.store');
+Route::get('/open-tickets', [TicketController::class, 'openIndex'])->name('open.tickets.index');
+Route::get('/closed-tickets', [TicketController::class, 'closedIndex'])->name('closed.tickets.index');
+Route::patch('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
+Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
+Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

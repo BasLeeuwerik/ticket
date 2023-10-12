@@ -10,16 +10,30 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
                     <h1>Edit Ticket</h1><br>
-                    <form method="PATCH" action="/ticket/{{ $ticket->id }}/update" enctype="multipart/form-data">
-                        @method('PATCH')
+                    <form method="PATCH" action="/tickets/{{ $ticket }}">
+                        @csrf
+                        @method('PUT')
 
                         <label for="employee">Employee</label>
-                        <div class="form-group text-gray-900">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $ticket->user->name) }}">
-                        </div><br>
 
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <div class="form-group text-gray-900">
+                            @foreach ($users as $user)
+
+                            <select class="form-control m-bot15" name="user">
+
+                                <option value="{{ $user->name }}" {{ $selectedUser = $user->id ? 'selected="selected"' : '' }}>{{ $user->name }}</option>
+
+                        </div>
+
+                        </select>
+                        @endforeach
+
+                        <br>
+                        </label>
+
+                        <a href="{{ route('tickets.update', $ticket['id']) }}" class="stretched-link text-white">Update</a>
                     </form>
+
                 </div>
             </div>
         </div>

@@ -15,13 +15,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('open.ticket.index')" :active="request()->routeIs('open-tickets')">
+                    <x-nav-link :href="route('open.tickets.index')" :active="request()->routeIs('open.tickets.index')">
                         {{ __('Open Tickets') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('closed.ticket.index')" :active="request()->routeIs('closed-tickets')">
+                    <x-nav-link :href="route('closed.tickets.index')" :active="request()->routeIs('closed.tickets.index')">
                         {{ __('Closed Tickets') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('ticket.create')" :active="request()->routeIs('ticket')">
+                    <x-nav-link :href="route('tickets.create')" :active="request()->routeIs('tickets.create')">
                         {{ __('Create Ticket') }}
                     </x-nav-link>
                 </div>

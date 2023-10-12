@@ -16,7 +16,6 @@ return new class extends Migration
             $table->timestamps();
             $table->dateTime('start_date_time');
             $table->dateTime('end_date_time');
-            $table->string('employee')->nullable();
             $table->string('status');
             $table->text('comment')->nullable();
             $table->string('image_url')->nullable();
