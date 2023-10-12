@@ -19,16 +19,17 @@
                 <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
                 <a href="/tickets/{{ $ticket->id }}/edit">Edit</a>
 
-                    <p class="mt-6">Status: {{ $ticket->status }} </p>
-                    <p class="mb-6 mt-6">Duration: {{ $days }}</p>
+                <p class="mt-6"><b>ID:</b> {{ $ticket->id }} </p>
+                    <p><b>Status:</b> {{ $ticket->status }} </p>
+                    <p class="mb-6 mt-6"><b>Duration:</b> {{ $days }}</p>
 
-                    <p>Start Date & Time: {{ $ticket->start_date_time }}</p>
-                    <p>End Date & Time: {{ $ticket->end_date_time }}</p>
-                    <p>Employee: {{ $ticket->user->name }}</p>
-                    <p>Note: {{ $ticket->comment }}</p>
-                    <p>Photo: <img src="{{ asset('path_to_your_images/' . $ticket->image_url) }}" alt="Ticket Photo"></p>
+                    <p><b>Start Date & Time:</b> {{ $ticket->start_date_time }}</p>
+                    <p><b>End Date & Time:</b> {{ $ticket->end_date_time }}</p>
+                    <p><b>Employee:</b> {{ $ticket->user->name }}</p>
+                    <p><b>Note:</b> {{ $ticket->comment }}</p>
+                    <p><b>Photo:</b> <img src="{{ asset('path_to_your_images/' . $ticket->image_url) }}" alt="Ticket Photo"></p>
 
-                    <p class="mt-6">Materials</p>
+                    <p class="mt-6"><b>Materials</b></p>
                     <ul>
                         @foreach($ticket->materials as $material)
                         <li>{{ $material->name }} - Quantity: {{ $material->quantity }}</li>

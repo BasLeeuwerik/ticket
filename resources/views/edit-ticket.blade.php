@@ -15,23 +15,29 @@
                         @method('PUT')
 
                         <label for="employee">Employee</label>
-
                         <div class="form-group text-gray-900">
-                            @foreach ($users as $user)
+                            <div class="relative inline-block text-left">
+                                <select name="user" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                    <option value="{{ $ticket->user->name }}">{{ $ticket->user->name }}</option>
+                                    @foreach ($users as $user)
+                                    <option value={{ $user->name }}> {{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><br>
+                            </label>
 
-                            <select class="form-control m-bot15" name="user">
+                            <label for="status">Status</label>
+                            <div class="form-group text-gray-900">
+                                <div class="relative inline-block text-left">
+                                    <select name="status" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                        @foreach ($tickets as $ticket)
+                                        <option value={{ $ticket->status }}>{{ $ticket->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div><br>
+                                </label>
 
-                                <option value="{{ $user->name }}" {{ $selectedUser = $user->id ? 'selected="selected"' : '' }}>{{ $user->name }}</option>
-
-                        </div>
-
-                        </select>
-                        @endforeach
-
-                        <br>
-                        </label>
-
-                        <a href="{{ route('tickets.update', $ticket['id']) }}" class="stretched-link text-white">Update</a>
+                                <a href="{{ route('tickets.update', $ticket['id']) }}" class="stretched-link text-white">Update</a>
                     </form>
 
                 </div>

@@ -44,7 +44,7 @@ class TicketController extends Controller
 
     public function create()
     {
-        return view('create-ticket', 'users');
+        return view('create-ticket');
     }
 
     public function store(Request $request)
@@ -86,9 +86,7 @@ class TicketController extends Controller
 
         $user = User::where('id', $ticket->user_id)->first();
 
-        $selectedUser = $user;
-
-        return view('edit-ticket', compact('ticket', 'users', 'user', 'selectedUser'));
+        return view('edit-ticket', compact('ticket', 'tickets', 'users', 'user'));
     }
 
     public function update(Request $request, $id)
