@@ -43,36 +43,40 @@ class TicketController extends Controller
         return view('show-ticket', compact('ticket'));
     }
 
-    public function create()
+    public function create(User $user, Ticket $ticket)
     {
-        return view('create-ticket');
+        $users = User::all();
+
+        $tickets = Ticket::all();
+
+        return view('create-ticket', compact('users', 'ticket', 'tickets'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'start_date_time' => 'required|date',
-            'end_date_time' => 'required|date|after:start_date_time',
-            'employee' => 'required|string',
-            'note' => 'required|string',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as needed
+        $validated = (object)$request->validate([
+            'start_date_time' => 'required',
+            'end_date_time' => '',
+            'user_id' => 'required',
+            'status' => '',
+            'comment' => '',
         ]);
-    
+
         $ticket = new Ticket;
-    
-        $ticket->start_date_time = $request->input('start_date_time');
-        $ticket->end_date_time = $request->input('end_date_time');
-        $ticket->employee = $request->input('employee');
-        $ticket->note = $request->input('note');
-    
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos');
-            $ticket->photo = $photoPath;
-        }
-    
+        $ticket->start_date_time = $validated->start_date_time;
+        $ticket->end_date_time = $validated->end_date_time;
+        $ticket->user_id = $validated->user_id;
+        $ticket->comment = $validated->comment;
+        $ticket->status = 'open';
         $ticket->save();
     
-        return redirect()->route('tickets.show', $ticket->id)->with('success', 'Ticket created successfully');
+        // if ($request->hasFile('photo')) {
+        //     $photoPath = $request->file('photo')->store('photos');
+        //     $ticket->photo = $photoPath;
+        // }
+    
+    
+        return redirect()->route('ticket.show', $ticket->id)->with('success', 'Ticket created successfully');
     }
 
     public function edit(User $user, Ticket $ticket)
@@ -99,6 +103,5 @@ class TicketController extends Controller
 
 
         return to_route('ticket.show', ['ticket' => $ticket->id]);
-
     }
 }
