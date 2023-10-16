@@ -17,9 +17,9 @@
 
                 @endphp
                 <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
-                <a href="/tickets/{{ $ticket->id }}/edit">Edit</a>
+                    <a href="/tickets/{{ $ticket->id }}/edit">Edit</a>
 
-                <p class="mt-6"><b>ID:</b> {{ $ticket->id }} </p>
+                    <p class="mt-6"><b>ID:</b> {{ $ticket->id }} </p>
                     <p><b>Status:</b> {{ $ticket->status }} </p>
                     <p class="mb-6 mt-6"><b>Duration:</b> {{ $days }}</p>
 
@@ -27,7 +27,7 @@
                     <p><b>End Date & Time:</b> {{ $ticket->end_date_time }}</p>
                     <p><b>Employee:</b> {{ $ticket->user->name }}</p>
                     <p><b>Comment:</b> {{ $ticket->comment }}</p>
-                    <p><b>Photo:</b> <img src="{{ asset('storage/app/' . $ticket->image) }}" alt="Ticket Photo"></p>
+                    <p><b>Photo:</b><img src="{{ $ticket->image }}" alt="Ticket Image"></p>
 
                     <p class="mt-6"><b>Materials</b></p>
                     <ul>

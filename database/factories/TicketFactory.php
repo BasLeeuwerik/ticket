@@ -29,7 +29,7 @@ class TicketFactory extends Factory
             'image' => fake()->imageUrl(),
             'user_id' => function () {
                 return (User::factory())->create()->id;
-            }, 
+            },
         ];
     }
 }

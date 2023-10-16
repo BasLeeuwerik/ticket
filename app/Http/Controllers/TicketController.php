@@ -68,8 +68,8 @@ class TicketController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('images', $imageName, 'public');
-            $imageUrl = asset('storage/' . $imagePath);
+            $imagePath = $image->storeAs('storage/app/image', $imageName);
+            $imageUrl = asset('storage/app/image/' . $imageName);
         }
 
         $ticket = new Ticket;
