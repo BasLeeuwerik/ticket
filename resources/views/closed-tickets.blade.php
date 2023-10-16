@@ -12,6 +12,7 @@
                 <table class="text-white-900 dark:text-white mt-16 ml-6 mb-6 mr-6" style="width:100%">
 
                     <tr class="text-left">
+                        <th>ID</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Status</th>
@@ -29,11 +30,12 @@
                     @endphp
 
                     <tr>
+                        <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->created_at }}</td>
                         <td>{{ $days }}</td>
                         <td>{{ $ticket->status }}</td>
                         <td>{{ $ticket->user->name }}</td>
-                        <td><a href="/tickets/{{ $ticket->id }}">View</a></td>
+                        <td><a href="/ticket/{{ $ticket->id }}">View</a></td>
                     </tr>
                     @endforeach
 

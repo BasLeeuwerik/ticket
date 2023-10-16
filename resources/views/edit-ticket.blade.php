@@ -30,9 +30,8 @@
                             <div class="form-group text-gray-900">
                                 <div class="relative inline-block text-left">
                                     <select name="status" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                        @foreach ($tickets as $ticket)
-                                        <option value={{ $ticket->status }}>{{ $ticket->status }}</option>
-                                        @endforeach
+                                        <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
+                                        <option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
                                     </select>
                                 </div><br>
                                 </label>
