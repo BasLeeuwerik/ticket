@@ -32,6 +32,7 @@
                                     <select name="status" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                         <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
                                         <option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
+                                        <option value="completed" {{ $ticket->status == 'completed' ? 'selected' : '' }}>Completed</option>
                                     </select>
                                 </div><br>
                                 </label>
