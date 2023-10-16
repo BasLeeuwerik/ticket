@@ -12,7 +12,7 @@
 
                     <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
                         <h1>Create Ticket</h1><br>
-                        <form method="POST" action="/tickets">
+                        <form method="POST" action="/tickets" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
 
@@ -50,7 +50,12 @@
 
                                     <div class="form-group">
                                         <label for="comment">Comment:</label>
-                                        <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="image">Image (optional):</label>
+                                        <input type="file" class="form-control-file" id="image" name="image" enctype="multipart/form-data">
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Create Ticket</button>

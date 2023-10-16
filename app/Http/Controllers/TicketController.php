@@ -60,21 +60,26 @@ class TicketController extends Controller
             'user_id' => 'required',
             'status' => '',
             'comment' => '',
+            'image' => '',
         ]);
+
+        $imageUrl = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('images', $imageName, 'public');
+            $imageUrl = asset('storage/' . $imagePath);
+        }
 
         $ticket = new Ticket;
         $ticket->start_date_time = $validated->start_date_time;
         $ticket->end_date_time = $validated->end_date_time;
         $ticket->user_id = $validated->user_id;
         $ticket->comment = $validated->comment;
+        $ticket->image = $request->file('image')->store('image');
         $ticket->status = 'open';
         $ticket->save();
-    
-        // if ($request->hasFile('photo')) {
-        //     $photoPath = $request->file('photo')->store('photos');
-        //     $ticket->photo = $photoPath;
-        // }
-    
     
         return redirect()->route('ticket.show', $ticket->id)->with('success', 'Ticket created successfully');
     }

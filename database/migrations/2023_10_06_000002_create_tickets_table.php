@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('end_date_time');
             $table->string('status');
             $table->text('comment')->nullable();
-            $table->string('image_url')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();
         });
     }

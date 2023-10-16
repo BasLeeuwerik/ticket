@@ -26,8 +26,8 @@
                     <p><b>Start Date & Time:</b> {{ $ticket->start_date_time }}</p>
                     <p><b>End Date & Time:</b> {{ $ticket->end_date_time }}</p>
                     <p><b>Employee:</b> {{ $ticket->user->name }}</p>
-                    <p><b>Note:</b> {{ $ticket->comment }}</p>
-                    <p><b>Photo:</b> <img src="{{ asset('path_to_your_images/' . $ticket->image_url) }}" alt="Ticket Photo"></p>
+                    <p><b>Comment:</b> {{ $ticket->comment }}</p>
+                    <p><b>Photo:</b> <img src="{{ asset('storage/app/' . $ticket->image) }}" alt="Ticket Photo"></p>
 
                     <p class="mt-6"><b>Materials</b></p>
                     <ul>
