@@ -10,38 +10,39 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white text-white-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
-                    <div class="container mt-6 mb-6 mr-6 ml-6 text-gray-900">
-                        <form method="POST" action="{{ route('tickets.store') }}" enctype="multipart/form-data">
-                            @csrf
+                <div class="container text-white-900 dark:text-white mt-6 ml-6 mb-6 mr-6" style="width:100%">
+                    <h1>Create Ticket</h1><br>
+                    <form method="POST" action="/tickets">
+                        @csrf
+                        @method('POST')
 
-                            <div class="form-group">
-                                <label for="start_date_time">Start Date & Time</label>
-                                <input type="datetime-local" id="start_date_time" name="start_date_time" class="form-control" required>
-                            </div>
+                        <label for="employee">Employee</label>
+                        <div class="form-group text-gray-900">
+                            <div class="relative inline-block text-left">
+                                <select name="user" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                    <option value="{{ $ticket->user->name }}">{{ $ticket->user->name }}</option>
+                                    @foreach ($users as $user)
+                                    <option value={{ $user->name }}> {{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div><br>
+                            </label>
 
-                            <div class="form-group">
-                                <label for="end_date_time">End Date & Time</label>
-                                <input type="datetime-local" id="end_date_time" name="end_date_time" class="form-control" required>
-                            </div>
+                            <label for="status">Status</label>
+                            <div class="form-group text-gray-900">
+                                <div class="relative inline-block text-left">
+                                    <select name="status" class="mt-6 mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                        @foreach ($tickets as $ticket)
+                                        <option value={{ $ticket->status }}>{{ $ticket->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div><br>
+                                </label>
 
-                            <div class="form-group">
-                                <label for="employee">Employee</label>
-                                <input type="text" id="employee" name="employee" class="form-control" required>
-                            </div>
+                                <a href="{{ route('tickets.store' }}" class="stretched-link text-white">Create</a>
+                    </form>
 
-                            <div class="form-group">
-                                <label for="note">Note</label>
-                                <textarea id="note" name="note" class="form-control" required></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <input type="file" id="photo" name="photo" class="form-control">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary mt-6">Create</button>
-                        </form>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>

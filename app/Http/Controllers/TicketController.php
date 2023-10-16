@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -78,35 +79,26 @@ class TicketController extends Controller
     {
         $users = User::all();
 
-        // dd($users);
-
         $tickets = Ticket::all();
-
-        $ticket = Ticket::where('id', $ticket->id)->first();
-
-        $user = User::where('id', $ticket->user_id)->first();
 
         return view('edit-ticket', compact('ticket', 'tickets', 'users', 'user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Ticket $ticket): RedirectResponse
     {
-        $ticket = Ticket::findOrFail($id);
+        $validated = (object)$request->validate([
+            'user_id' => 'required',
+            'status' => 'required',
+        ]);
 
-        $ticket->start_date_time = $request->input('start_date_time');
-        $ticket->end_date_time = $request->input('end_date_time');
-        $ticket->name = $request->input('name');
-        $ticket->note = $request->input('note');
+        // $validated = (object)$request->validated();
 
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos');
-            $ticket->photo = $photoPath;
-        }
-
+        $ticket->user_id = $validated->user_id;
+        $ticket->status = $validated->status;
         $ticket->save();
 
-        return view('show-ticket', [
-            'ticket' => $ticket,
-        ]);
+
+        return to_route('ticket.show', ['ticket' => $ticket->id]);
+
     }
 }

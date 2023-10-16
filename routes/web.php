@@ -25,10 +25,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/open-tickets', [TicketController::class, 'openIndex'])->name('open.tickets.index');
 Route::get('/closed-tickets', [TicketController::class, 'closedIndex'])->name('closed.tickets.index');
+Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
 Route::patch('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
-Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
-Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+Route::get('/ticket/{ticket}', [TicketController::class, 'show'])->name('ticket.show');
 Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
 Route::middleware('auth')->group(function () {
