@@ -70,7 +70,7 @@
                         @endforeach
 
                         <div class="text-white-900">
-                            <button type="submit" class="text-white-900 mt-6 btn btn-primary">Update Ticket</button>
+                            <button type="submit" class="text-white-900 mt-6 btn btn-primary">Save Ticket</button>
                         </div>
                     </form>
 

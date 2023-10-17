@@ -36,6 +36,7 @@
                         <td>{{ $ticket->status }}</td>
                         <td>{{ $ticket->user->name }}</td>
                         <td><a href="/ticket/{{ $ticket->id }}">View</a></td>
+                        <td><a href="/tickets/{{ $ticket->id }}/edit">Edit</a></td>
                     </tr>
                     @endforeach
 
