@@ -137,6 +137,8 @@ class TicketController extends Controller
 
         $materialNames = $request->input('material_name');
 
+        $ticket->materials()->delete();
+
         foreach ($materialNames as $index => $materialName) {
             $ticket->materials()->create([
                 'material_name' => $materialName,

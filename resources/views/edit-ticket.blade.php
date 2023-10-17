@@ -41,12 +41,12 @@
                             <div class="form-group container text-white-900 dark:text-white" style="width:100%">
                                 <label for="start_date_time">Start Date and Time:</label>
                             </div>
-                            <input type="datetime-local" class="form-control shadow-sm sm:rounded-lg" id="start_date_time" name="start_date_time" required>
+                            <input type="datetime-local" class="form-control shadow-sm sm:rounded-lg" id="start_date_time" name="start_date_time" value="{{ $ticket->start_date_time }}" required>
 
                             <div class="form-group container text-white-900 dark:text-white" style="width:100%">
                                 <label for="end_date_time">End Date and Time:</label>
                             </div>
-                            <input type="datetime-local" class="form-control shadow-sm sm:rounded-lg" id="end_date_time" name="end_date_time">
+                            <input type="datetime-local" class="form-control shadow-sm sm:rounded-lg" id="end_date_time" name="end_date_time" value="{{ $ticket->end_date_time }}">
                         </div>
 
 
