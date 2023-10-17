@@ -75,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" id="add-material">Add Material</button><br>
+                            <button type="button" id="add-material">Add Material (new material field)</button><br>
 
                             <div class="text-white-900">
                                 <button type="submit" class="text-white-900 mt-6 btn btn-primary">Create Ticket</button>
