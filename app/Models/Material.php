@@ -9,6 +9,16 @@ class Material extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'material_name',
+        'material_quantity',
+    ];
+
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);

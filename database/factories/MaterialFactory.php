@@ -21,8 +21,8 @@ class MaterialFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word,
-            'quantity' => fake()->numberBetween(1, 10),
+            'material_name' => fake()->word,
+            'material_quantity' => fake()->numberBetween(1, 10),
             'ticket_id' => function () {
                 return (Ticket::factory())->create()->id;
             },

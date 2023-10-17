@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('quantity');
+            $table->string('material_name');
+            $table->integer('material_quantity');
             $table->foreignId('ticket_id')->constrained();
             $table->timestamps();
         });        

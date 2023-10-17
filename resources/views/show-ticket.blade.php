@@ -27,12 +27,12 @@
                     <p><b>End Date & Time:</b> {{ $ticket->end_date_time }}</p>
                     <p><b>Employee:</b> {{ $ticket->user->name }}</p>
                     <p><b>Comment:</b> {{ $ticket->comment }}</p>
-                    <p><b>Photo:</b><img src="{{ $ticket->image }}" alt="Ticket Image"></p>
+                    <p><b>Photo:</b><img src="{{ $ticket->image }}" alt="{{ $ticket->image }}"></p>
 
                     <p class="mt-6"><b>Materials</b></p>
                     <ul>
                         @foreach($ticket->materials as $material)
-                        <li>{{ $material->name }} - Quantity: {{ $material->quantity }}</li>
+                        <li>{{ $material->material_name }} - Quantity: {{ $material->material_quantity }}</li>
                         @endforeach
                     </ul>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Material;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -43,13 +44,13 @@ class TicketController extends Controller
         return view('show-ticket', compact('ticket'));
     }
 
-    public function create(User $user, Ticket $ticket)
+    public function create(User $user, Ticket $ticket, Material $material)
     {
         $users = User::all();
-
         $tickets = Ticket::all();
+        $materials = Material::all();
 
-        return view('create-ticket', compact('users', 'ticket', 'tickets'));
+        return view('create-ticket', compact('users', 'ticket', 'tickets', 'materials'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -61,15 +62,14 @@ class TicketController extends Controller
             'status' => '',
             'comment' => '',
             'image' => '',
+            'material_name' => '',
+            'material_quantity' => '',
         ]);
 
-        $imageUrl = null;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('storage/app/image', $imageName);
-            $imageUrl = asset('storage/app/image/' . $imageName);
+        if ($request->file('image') == null) {
+            $file = "";
+        } else {
+            $file = $request->file('image')->store('image');
         }
 
         $ticket = new Ticket;
@@ -77,10 +77,22 @@ class TicketController extends Controller
         $ticket->end_date_time = $validated->end_date_time;
         $ticket->user_id = $validated->user_id;
         $ticket->comment = $validated->comment;
-        $ticket->image = $request->file('image')->store('image');
+        $ticket->image = $file;
         $ticket->status = 'open';
         $ticket->save();
-    
+
+        $materialNames = $request->input('material_name');
+
+        foreach ($materialNames as $index => $materialName) {
+            $ticket->materials()->create([
+                'material_name' => $materialName,
+                'material_quantity' => $request->input('material_quantity')[$index],
+                'ticket_id' => $ticket->id,
+            ]);
+        }
+
+        $ticket->save();
+
         return redirect()->route('ticket.show', $ticket->id)->with('success', 'Ticket created successfully');
     }
 
@@ -96,16 +108,44 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket): RedirectResponse
     {
         $validated = (object)$request->validate([
+            'start_date_time' => 'required',
+            'end_date_time' => '',
             'user_id' => 'required',
-            'status' => 'required',
+            'status' => '',
+            'comment' => '',
+            'image' => '',
+            'material_name.*' => '',
+            'material_quantity.*' => '',
         ]);
 
-        // $validated = (object)$request->validated();
+        if ($request->file('image') == null) {
+            $file = "";
+        } else {
+            $file = $request->file('image')->store('image');
+        }
 
+        $ticket->start_date_time = $validated->start_date_time;
+        $ticket->end_date_time = $validated->end_date_time;
+        $ticket->user_id = $validated->user_id;
+        $ticket->comment = $validated->comment;
+        $ticket->image = $file;
+        $ticket->status = $validated->status;
         $ticket->user_id = $validated->user_id;
         $ticket->status = $validated->status;
+        $ticket->comment = $validated->comment;
         $ticket->save();
 
+        $materialNames = $request->input('material_name');
+
+        foreach ($materialNames as $index => $materialName) {
+            $ticket->materials()->create([
+                'material_name' => $materialName,
+                'material_quantity' => $request->input('material_quantity')[$index],
+                'ticket_id' => $ticket->id,
+            ]);
+        }
+
+        $ticket->save();
 
         return to_route('ticket.show', ['ticket' => $ticket->id]);
     }
